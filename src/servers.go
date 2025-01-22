@@ -39,13 +39,11 @@ func SingUp(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Parse form data for POST requests
 	r.ParseForm()
 	username := r.FormValue("username")
-	email := r.FormValue("gmail")
+	email := r.FormValue("email")
 	password := r.FormValue("password")
 
-	// Insert the user into the database
 	insertQuery := `INSERT INTO users (username, email, password) VALUES (?, ?, ?);`
 	_, err := db.Exec(insertQuery, username, email, password)
 	if err != nil {
@@ -53,7 +51,7 @@ func SingUp(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
-
+	http.Redirect(w, r, "/singin", http.StatusSeeOther)
 }
 
 func SingIn(w http.ResponseWriter, r *http.Request) {
@@ -77,8 +75,8 @@ func SingIn(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
 	}
-	
-	fmt.Println(password+"Password does not match"+dbPassword)
+
+	fmt.Println(password + "Password does not match" + dbPassword)
 
 	if password != dbPassword {
 		http.Redirect(w, r, "/singin", http.StatusSeeOther)
