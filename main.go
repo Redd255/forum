@@ -11,8 +11,8 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", myserver.SingUp)
-	http.HandleFunc("/singin", myserver.SingIn)
+	http.HandleFunc("/", myserver.SignUp)
+	http.HandleFunc("/signin", myserver.SignIn)
 	http.HandleFunc("/homepage", myserver.HomePage)
 
 	fmt.Println("Server running at http://localhost:8080")
