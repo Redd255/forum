@@ -7,6 +7,12 @@
 </head>
 <body>
     <h1>Insert User</h1>
+    {{if .ErrorMessage}}
+    <div style="color: red; margin-bottom: 10px;">
+        {{.ErrorMessage}}
+    </div>
+    {{end}}
+
     <form action="/" method="POST">
         <label for="username">UserName:</label>
         <input type="text" id="username" name="username" required><br><br>

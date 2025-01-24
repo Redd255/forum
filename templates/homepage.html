@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Welcome to the Forum!</h1>
+
+    <!-- Error Message Placeholder -->
+    {{if .ErrorMessage}}
+    <div style="color: red; margin-bottom: 10px;">
+    {{.ErrorMessage}}
+    </div>
+    {{end}}
+
+    <!-- Post Submission Form -->
+    <form action="/homepage" method="POST">
+        <textarea name="content" rows="4" cols="50" placeholder="Write your post..."></textarea><br>
+        <button type="submit">Submit Post</button>
+    </form>
+
+    <!-- Display Existing Posts -->
+    <div class="posts">
+        {{range .Posts}}
+        <div class="post">
+            <strong>User #{{.UserID}}:</strong>
+            <p>{{.Content}}</p>
+        </div>
+        {{end}}
+    </div>
+</body>
+</html>
