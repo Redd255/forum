@@ -2,31 +2,22 @@
 <html>
 <head>
     <title>Home Page</title>
+    <link rel="stylesheet" href="/static/test.css">
 </head>
 <body>
-    <h1>Welcome to the Forum!</h1>
+    <h1>Welcome, {{.Username}}!</h1>
 
-    <!-- Error Message Placeholder -->
-    {{if .ErrorMessage}}
-    <div style="color: red; margin-bottom: 10px;">
-    {{.ErrorMessage}}
-    </div>
-    {{end}}
-
-    <!-- Post Submission Form -->
-    <form action="/homepage" method="POST">
-        <textarea name="content" rows="4" cols="50" placeholder="Write your post..."></textarea><br>
-        <button type="submit">Submit Post</button>
+    <form method="POST">
+        <textarea name="content" placeholder="What's on your mind?" rows="4" cols="50"></textarea><br>
+        <input type="submit" value="Post">
     </form>
 
-    <!-- Display Existing Posts -->
-    <div class="posts">
-        {{range .Posts}}
-        <div class="post">
-            <strong>User #{{.UserID}}:</strong>
-            <p>{{.Content}}</p>
-        </div>
-        {{end}}
+    <h2>Recent Posts</h2>
+    {{range .Posts}}
+    <div style="margin: 20px 0; padding: 10px; border: 1px solid #ccc;">
+        <strong>{{.Username}}</strong>
+        <p>{{.Content}}</p>
     </div>
+    {{end}}
 </body>
 </html>

@@ -18,7 +18,6 @@ func init() {
 		log.Fatal(err)
 	}
 
-	// Create tables
 	_, err = db.Exec(`
 		CREATE TABLE IF NOT EXISTS users (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,

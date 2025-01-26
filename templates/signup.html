@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insert Data</title>
+    <link rel="stylesheet" href="/static/test.css">
+    <title>Forum</title>
 </head>
 <body>
-    <h1>Insert User</h1>
-    {{if .ErrorMessage}}
-    <div style="color: red; margin-bottom: 10px;">
-        {{.ErrorMessage}}
-    </div>
-    {{end}}
+    <h1>Forum</h1>
+
 
     <form action="/" method="POST">
+        {{if .ErrorMessage}}
+        <div style="color: red; margin-bottom: 10px;">
+            {{.ErrorMessage}}
+        </div>
+        {{end}}
+        
         <label for="username">UserName:</label>
         <input type="text" id="username" name="username" required><br><br>
 
