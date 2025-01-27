@@ -14,19 +14,17 @@
 </head>
 <body>
     <h1>Sign In</h1>
-
-    {{ if .ErrorMessage }}
-        <div class="error-message">{{ .ErrorMessage }}</div>
-    {{ end }}
-
     <form action="/signin" method="POST">
+        {{ if .ErrorMessage }}
+        <div class="error-message">{{ .ErrorMessage }}</div>
+        {{ end }}
         <label for="username">Username:</label><br>
         <input type="text" id="username" name="username" placeholder="Enter your username"><br><br>
 
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password" placeholder="Enter your password"><br><br>
 
-        <input type="submit" value="Sign In">
+        <button type="submit" >Submit</button>
     </form>
 </body>
 </html>

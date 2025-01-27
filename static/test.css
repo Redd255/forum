@@ -1,82 +1,84 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0; 
+    background-color: #f0f0f0;
     margin: 0;
     padding: 20px;
     color: #333;
 }
 
-h1, h2 {
-    color: #222; 
+h1 {
     text-align: center;
 }
 
 form {
-    background-color: #fff; 
+    background-color: #fff;
     padding: 20px;
-    border: 2px solid #000; 
+    border: 2px solid #000;
     max-width: 400px;
     margin: 20px auto;
 }
 
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
+input, textarea, button, select {
+    border: 2px solid #000 !important;
+    border-radius: 0 !important;
+    padding: 8px;
+    margin: 5px 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="email"],
 textarea {
     width: 95%;
-    padding: 8px;
     margin-bottom: 10px;
-    border: 2px solid #000; 
     font-size: 14px;
-    background-color: #fff; 
-    resize: none
+    resize: none;
 }
 
-input[type="submit"],
 button {
-    background-color: #007bff; 
+    background-color: #007bff;
     color: white;
     padding: 8px 16px;
-    border: 2px solid #000;
     font-size: 14px;
     cursor: pointer;
+    transition: background-color 0.3s;
+    width: auto;
 }
 
-input[type="submit"]:hover,
 button:hover {
-    background-color: #0056b3; 
+    background-color: #0056b3;
 }
 
-.error-message {
-    color: red;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-#homepage {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-#homepage .post {
-    background-color: #fff; 
-    padding: 10px;
+.post {
+    background-color: #fff;
+    padding: 15px;
     border: 2px solid #000;
+    margin-bottom: 20px;
+}
+
+.post h3 {
+    color: #007bff;
     margin-bottom: 10px;
 }
 
-#homepage .post strong {
-    color: #007bff; 
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
 }
 
-#signin, #signup {
-    max-width: 400px;
-    margin: 0 auto;
-    text-align: center;
+.comments {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #000; 
 }
+
+.comment {
+    margin-bottom: 10px;
+    padding: 8px;
+    background-color: #f8f8f8;
+    border-left: 3px solid #007bff;
+}
+
+/* .post-form {
+
+} */

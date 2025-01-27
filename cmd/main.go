@@ -50,7 +50,33 @@ func init() {
 	if err != nil {
 		log.Fatal("Failed to create sessions table:", err)
 	}
+	_, err = db.Exec(`
+    CREATE TABLE IF NOT EXISTS comments (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        post_id INTEGER NOT NULL,
+        user_id INTEGER NOT NULL,
+        content TEXT NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY(post_id) REFERENCES posts(id),
+        FOREIGN KEY(user_id) REFERENCES users(id)
+    )`)
+	if err != nil {
+		log.Fatal("Failed to create comments table:", err)
+	}
 
+	_, err = db.Exec(`
+    CREATE TABLE IF NOT EXISTS likes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        post_id INTEGER NOT NULL,
+        user_id INTEGER NOT NULL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(post_id, user_id),
+        FOREIGN KEY(post_id) REFERENCES posts(id),
+        FOREIGN KEY(user_id) REFERENCES users(id)
+    )`)
+	if err != nil {
+		log.Fatal("Failed to create likes table:", err)
+	}
 	myserver.InitHandlers(db)
 }
 
@@ -61,6 +87,8 @@ func main() {
 	http.HandleFunc("/signup", myserver.SignUp)
 	http.HandleFunc("/signin", myserver.SignIn)
 	http.HandleFunc("/homepage", myserver.HomePage)
+	http.HandleFunc("/comment", myserver.AddComment)
+    http.HandleFunc("/like", myserver.AddLike)
 
 	fmt.Println("Server running at http://localhost:8080")
 	log.Fatal(http.ListenAndServe(":8080", nil))

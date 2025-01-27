@@ -1,0 +1,1 @@
+PS C: forum\cmd> go run .  
