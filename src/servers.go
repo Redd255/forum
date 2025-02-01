@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/google/uuid"
+	"github.com/gofrs/uuid"
 	_ "github.com/mattn/go-sqlite3"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -61,6 +61,7 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 		errorPage(w, "Email already in use", "signup.html")
 		return
 	}
+
 	if err != sql.ErrNoRows {
 		log.Println("Database error:", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -104,11 +105,6 @@ func SignIn(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if err := r.ParseForm(); err != nil {
-		http.Error(w, "Failed to parse form", http.StatusBadRequest)
-		return
-	}
-
 	username := r.FormValue("username")
 	password := r.FormValue("password")
 
@@ -135,7 +131,13 @@ func SignIn(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	sessionID := uuid.New().String()
+	sessionUUID, err := uuid.NewV4()
+	if err != nil {
+		log.Printf("Failed to generate UUID: %v", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	sessionID := sessionUUID.String()
 	expiry := time.Now().Add(24 * time.Hour)
 	_, err = db.Exec("INSERT INTO sessions (session_id, user_id, expiry) VALUES (?, ?, ?)",
 		sessionID, userID, expiry)
