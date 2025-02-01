@@ -82,9 +82,9 @@ func init() {
 
 func main() {
 	staticDir := filepath.Join("..", "static")
+	fmt.Println(staticDir)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(staticDir))))
 	http.HandleFunc("/", myserver.SignUp)
-	http.HandleFunc("/signup", myserver.SignUp)
 	http.HandleFunc("/signin", myserver.SignIn)
 	http.HandleFunc("/homepage", myserver.HomePage)
 	http.HandleFunc("/comment", myserver.AddComment)
