@@ -30,7 +30,6 @@ func init() {
 		log.Fatal("Failed to create users table:", err)
 	}
 
-	// Insert default tags
 	defaultTags := []string{"Music", "Sports", "Technology", "Art", "Food", "Travel", "Fashion", "Health", "Education", "Gaming"}
 	for _, tagName := range defaultTags {
 		_, err = db.Exec("INSERT OR IGNORE INTO tags (name) VALUES (?)", tagName)
